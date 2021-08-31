@@ -14,6 +14,8 @@ To use this repository ...
 *[PyRosetta](https://www.pyrosetta.org)*
 2. This docker image may not work in your system due to the differences of system environment. Please refer to my system environment.
 
+Since this docker image will be generated based on the `nvidia/cuda-11.3.1-ubuntu20.04` docker image, the CUDA 11 compatible GPU is needed.
+
 <br/>
 
     Ubuntu 20.04
@@ -39,6 +41,8 @@ To use this repository ...
 1. PyRosetta 의 라이센스 (username / passwd) 가 필요합니다 -- *[PyRosetta](https://www.pyrosetta.org)*
 
 2. 시스템 환경에 따라 도커 이미지가 작동하지 않을 수 있습니다. 제 시스템 환경을 참고하세요.
+
+이 도커 이미지는 `nvidia/cuda-11.3.1-ubuntu20.04` 에 기반하여 제작됩니다. 따라서, 작동을 위해 CUDA 11 을 지원하는 GPU 가 필요합니다.
 
 <br/>
 
@@ -166,6 +170,73 @@ In the docker container, just run the RoseTTAFold as follows.
     $ run_pyrosetta_ver.sh ./input.fa ./result
 
 
+### **6. Copy results**
+
+The directory will be made as follows when the running is finished.
+
+    Working_dir/
+
+        /path/to/result
+            
+            hhblits/
+
+            model/
+                model_1.pdb
+                model_2.pdb
+                model_3.pdb
+                model_4.pdb
+                model_5.pdb
+
+            pdb-3track/
+
+            log/
+
+            parallel.fold.list
+
+            t000_.3track.npz
+
+            ...
+
+In the `model` directory, there are symbolic links for results (model1_.pdb, ...) which is connected to the several PDB files in `pdb-3track`.
+
+Since the result files are symbolic links, you need to copy the real files before you quit the docker container.
+
+You can copy those files to the path you want as follows.
+
+    python3 /home/copy_results.py --modelpath /path/to/model/directory/ --savepath /path/to/save/directory/
+
+    eg)
+    python3 /home/copy_results.py --modelpath ./model/ --savepath ./results/
+
+Then, the real files (not symbolic links) will be copied in the `savepath`.
+
+<br/>
+
+If you run the `copy_results.py` script in the `model` directory without using any arguments, 
+
+it is automatically copy the result PDB files into the directory, `model/picked/`.
+
+
+    # In the model directory,
+    python3 /home/copy_results.py
+
+    # directory
+    model/
+        
+        several_files...
+
+        picked/
+            model_1.pdb
+            model_2.pdb
+            model_3.pdb
+            model_4.pdb
+            model_5.pdb
+            log.txt
+
+
+You can find the `copy_results.py` script in this repository as well.
+
+
 <br/>
 <br/>
 
@@ -289,6 +360,74 @@ Dockerfile 을 다운로드 했으면, Dockerfile 의 45번째 줄에 PyRosetta 
 
     eg)
     $ run_pyrosetta_ver.sh ./input.fa ./result
+
+
+### **6. 결과 파일 복사하기s**
+
+모델링이 끝나고 나면 아래와 같이 디렉토리들이 생성됩니다.
+
+
+    Working_dir/
+
+        /path/to/result
+            
+            hhblits/
+
+            model/
+                model_1.pdb
+                model_2.pdb
+                model_3.pdb
+                model_4.pdb
+                model_5.pdb
+
+            pdb-3track/
+
+            log/
+
+            parallel.fold.list
+
+            t000_.3track.npz
+
+            ...
+
+`model` 디렉토리에는 결과 파일의 심볼릭 링크 (model_1.pdb, ...) 들이 들어있습니다. 이 심볼릭 링크들은 `pdb-3track` 경로 내에 있는 몇몇 PDB 파일과 연결되어 있습니다.
+
+결과 파일이 심볼릭 링크 파일이기 때문에, 도커 컨테이너를 종료하기 전에 실제 경로에 있는 파일을 복사하여 저장해야 합니다.
+
+저장은 아래와 같이 수행할 수 있습니다.
+
+
+    python3 /home/copy_results.py --modelpath /path/to/model/directory/ --savepath /path/to/save/directory/
+
+    eg)
+    python3 /home/copy_results.py --modelpath ./model/ --savepath ./results/
+
+
+이렇게 하면 심볼릭 링크가 아닌 실제 파일들이 유저가 설정한 `savepath` 에 저장됩니다.
+
+<br/>
+
+만일 `copy_results.py` 스크립트를 `model` 폴더 내에서 옵션을 사용하지 않고 실행시키면 
+
+스크립트가 자동으로 결과 파일을 `model/picked/` 경로에 복사합니다.
+
+    # In the model directory,
+    python3 /home/copy_results.py
+
+    # directory
+    model/
+        
+        several_files...
+
+        picked/
+            model_1.pdb
+            model_2.pdb
+            model_3.pdb
+            model_4.pdb
+            model_5.pdb
+            log.txt
+
+`copy_results.py` 스크립트는 이 저장소에서 직접 다운로드 하여 사용할 수도 있습니다.
 
 
 <br/>
