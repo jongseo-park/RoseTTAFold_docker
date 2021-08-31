@@ -57,8 +57,7 @@ RUN ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
 
 # Install PyRosetta
 WORKDIR /opt/RoseTTAFold/PyRosetta4.Release.python37.ubuntu.release-294/setup
-ENV PATH="/opt/conda/envs/folding/bin:%PATH"
-RUN python setup.py install
+RUN /opt/conda/envs/folding/bin/python setup.py install
 
 
 # Setup directory and symbolic links
