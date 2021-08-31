@@ -25,7 +25,7 @@ def copy (modelpath = args.modelpath, savepath = args.savepath):
             os.system (f"cp {j} {savepath}/{i}")
             log.write(i)
             log.write("-----")
-            log.write(j[48:] + "\n")
+            log.write(j[-29:-1] + "\n")
 
 
 # Run
