@@ -23,7 +23,8 @@ RUN apt-get update && \
 
 # Git clone
 WORKDIR /opt/
-RUN git clone https://github.com/RosettaCommons/RoseTTAFold.git
+RUN git clone https://github.com/RosettaCommons/RoseTTAFold.git \
+    && git clone https://github.com/jongseo-park/RoseTTAFold_docker.git
 
 
 # Generate conda envs
@@ -71,8 +72,8 @@ RUN mkdir run \
     && ln -sf /home/run/DAT/UniRef30_2020_06 /opt/RoseTTAFold \
     && ln -sf /home/run/DAT/bfd /opt/RoseTTAFold \
     && ln -sf /home/run/DAT/pdb100_2021Mar03 /opt/RoseTTAFold \
-    && ln -sf /home/run/DAT/weights /opt/RoseTTAFold
-
+    && ln -sf /home/run/DAT/weights /opt/RoseTTAFold \
+    && ln -sf /opt/RoseTTAFold_docker/copy_results.py /home/copy_results.py
 
 # Finalize
 WORKDIR /home/run/
