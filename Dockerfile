@@ -43,9 +43,9 @@ RUN conda env create -f RoseTTAFold-linux.yml \
 
 # Download PyRosetta from server
 WORKDIR /opt/RoseTTAFold
-RUN wget --user=name --password=passwd https://graylab.jhu.edu/download/PyRosetta4/archive/release/PyRosetta4.Release.python37.ubuntu/PyRosetta4.Release.python37.ubuntu.release-294.tar.bz2 \
-    && tar -vjxf PyRosetta4.Release.python37.ubuntu.release-294.tar.bz2 \
-    && rm -rf PyRosetta4.Release.python37.ubuntu.release-294.tar.bz2
+RUN wget --user=name --password=passwd https://graylab.jhu.edu/download/PyRosetta4/archive/release/PyRosetta4.Release.python37.ubuntu/PyRosetta4.Release.python37.ubuntu.release-304.tar.bz2 \
+    && tar -vjxf PyRosetta4.Release.python37.ubuntu.release-304.tar.bz2 \
+    && rm -rf PyRosetta4.Release.python37.ubuntu.release-304.tar.bz2
 
 
 # Install RoseTTAFold
