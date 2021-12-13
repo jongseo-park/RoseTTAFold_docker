@@ -5,7 +5,7 @@ MAINTAINER Jongseo_Park jongseopark@gist.ac.kr
 
 # If this Dockerfile doesn't work, please change the version of PyRosetta in line ### and ###.
 # For example ...
-# In line 51) ... release-304.tar.bz2 >> ... release-###.tar.bz2
+# In line 51, 52, 53) ... release-304.tar.bz2 >> ... release-###.tar.bz2
 # In line 65) ... release-304/setup >> ... release-###/setup
 
 # Initial setup
