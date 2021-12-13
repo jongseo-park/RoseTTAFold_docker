@@ -25,6 +25,11 @@ Since this docker image will be generated based on the `nvidia/cuda-11.3.1-ubunt
     CUDA version 11.2
     NVIDIA driver version 460.27.04
 
+If an error occurs when using this Dockerfile, please change the version of PyRosetta in line 51 and 65 in the Dockerfile.
+
+*(...release-304.tar.bz2 >>>> ... release-###.tar.bz2 (### is the version you want to use))*
+
+
 
 <br/>
 
