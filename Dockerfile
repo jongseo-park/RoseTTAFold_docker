@@ -3,6 +3,11 @@ FROM nvidia/cuda:11.3.1-base-ubuntu20.04
 MAINTAINER Jongseo_Park jongseopark@gist.ac.kr
 
 
+# If this Dockerfile doesn't work, please change the version of PyRosetta in line ### and ###.
+# For example ...
+# In line 51) ... release-304.tar.bz2 >> ... release-###.tar.bz2
+# In line 65) ... release-304/setup >> ... release-###/setup
+
 # Initial setup
 RUN apt-get update && \
     apt-get install -y \
@@ -57,7 +62,7 @@ RUN ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
 
 
 # Install PyRosetta
-WORKDIR /opt/RoseTTAFold/PyRosetta4.Release.python37.ubuntu.release-294/setup
+WORKDIR /opt/RoseTTAFold/PyRosetta4.Release.python37.ubuntu.release-304/setup
 RUN /opt/conda/envs/folding/bin/python setup.py install
 
 
